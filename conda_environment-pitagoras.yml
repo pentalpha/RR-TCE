@@ -1,0 +1,40 @@
+name: web
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=1_gnu
+  - ca-certificates=2021.1.19=h06a4308_0
+  - certifi=2020.12.5=py39h06a4308_0
+  - dotnet=5.0.100=ha770c72_4
+  - dotnet-aspnetcore=5.0.0=hb34047c_4
+  - dotnet-runtime=5.0.0=hb34047c_4
+  - dotnet-sdk=5.0.100=hb34047c_4
+  - icu=68.1=h2531618_0
+  - krb5=1.18.2=h173b8e3_0
+  - ld_impl_linux-64=2.33.1=h53a641e_7
+  - libcurl=7.71.1=h20c2e04_1
+  - libedit=3.1.20191231=h14c3975_1
+  - libffi=3.3=he6710b0_2
+  - libgcc-ng=9.3.0=h2828fa1_18
+  - libgomp=9.3.0=h2828fa1_18
+  - libssh2=1.9.0=h1ba5d50_1
+  - libstdcxx-ng=9.3.0=h6de172a_18
+  - liburcu=0.12=h516909a_0
+  - libuv=1.40.0=h7b6447c_0
+  - lttng-ust=2.10=hfb453c0_0
+  - ncurses=6.2=he6710b0_1
+  - nodejs=15.3.0=h92b4a50_1
+  - openssl=1.1.1i=h27cfd23_0
+  - pip=20.3.3=py39h06a4308_0
+  - python=3.9.1=hdb3f193_2
+  - readline=8.1=h27cfd23_0
+  - setuptools=52.0.0=py39h06a4308_0
+  - sqlite=3.33.0=h62c20be_0
+  - tk=8.6.10=hbc83047_0
+  - tzdata=2020f=h52ac0ba_0
+  - wheel=0.36.2=pyhd3eb1b0_0
+  - xz=5.2.5=h7b6447c_0
+  - zlib=1.2.11=h7b6447c_3
+prefix: /home/pitagoras/miniconda3/envs/web
