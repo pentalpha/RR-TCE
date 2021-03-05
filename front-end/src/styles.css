@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #2e9ce6;
+    padding: 3em;
+    font-family: 'Arial';
+    color: #fff;
+}
+
+.menu-list ul {
+    list-style-type: none;
+    margin: 0 0 2em 0;
+    padding: 0;
+}
+
+.menu-list li{
+    display: inline;
+}
+
+ul li {
+    margin-right: 30px;
+}
+
+ul li a {
+    font-size: 1.5em;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}

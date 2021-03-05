@@ -1,0 +1,56 @@
+.container {
+    display: grid;
+    grid-template-columns: 100% auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.col {
+    padding: .4em 1.3em;
+}
+
+.color-dark {
+    background: #2885C4;
+}
+
+.color-light {
+    background: #57b3f1;
+}
+
+input.txt {
+    border: 0;
+    padding: 1em;
+    width: 85%;
+}
+
+input.btn {
+    border: 0;
+    padding: 1em 3em;
+    background: #A5F883;
+    color: #003A61;
+    margin-left: 2em;
+    width: 10%;
+}
+
+.life-container {
+    background: #3FA0e1;
+    padding: .5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#lastTCCsTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#lastTCCsTable td, #lastTCCsTable th{
+    /*border: 1px solid #ddd;*/
+    padding: 1em;
+}
+
+#lastTCCsTable tr:nth-child(even){background-color: #3FA0e1;}
+
+#lastTCCsTable tr:hover {
+    background-color: #3FC0e1;
+}
