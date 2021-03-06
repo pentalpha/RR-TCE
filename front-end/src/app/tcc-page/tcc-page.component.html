@@ -1,0 +1,13 @@
+<div class="container color-dark">
+    <div class="col">
+        <h4>{{current_tcc.title}}</h4>
+        <p>{{current_tcc.date | date: 'dd/MM/yyyy' }}</p>
+        <p><strong>Autor</strong>: {{author}}</p>
+        <p><strong>Orientador</strong>: {{professor}}</p>
+        <p><strong>Aprovado</strong>: {{approved}}</p>
+        <p><strong>Palavras-chave</strong>: {{keyword_str}}</p>
+        <p><strong>Resumo</strong>:</p>
+        <p>{{current_tcc.abstract}}</p>
+        <a [href]="getFile(current_tcc.fileID)">Download</a>
+    </div>
+</div>

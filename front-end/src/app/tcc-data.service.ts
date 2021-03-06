@@ -17,9 +17,11 @@ export class TCC {
   title: string;
   author_id: number;
   professor_id: number;
+  approved: boolean;
   keywords: string[];
   abstract: string;
   date: Date;
+  fileID: number;
 }
 
 @Injectable({
@@ -56,11 +58,22 @@ export class TccDataService {
       new_tcc.keywords = tcc_keywords[i];
       new_tcc.abstract = tcc_abstracts[i];
       new_tcc.date = tcc_dates[i];
+      new_tcc.approved = false;
       this.tccs.push(new_tcc)
     }
   }
 
   obtainTCCs(){
     return this.tccs;
+  }
+
+  obtainTCC(id: Number): TCC{
+    for (let tcc of this.tccs){
+      if (id == tcc.id){
+        return tcc;
+      }
+    }
+
+    return new TCC();
   }
 }

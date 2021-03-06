@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexBodyComponent } from './index-body/index-body.component';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { TccPageComponent } from './tcc-page/tcc-page.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndexBodyComponent
+    IndexBodyComponent,
+    TccPageComponent
   ],
   imports: [
     BrowserModule,

@@ -11,3 +11,23 @@ a {
     text-decoration: none;
     color: #fff;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: 100% auto;
+    margin-top: .5em;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+
+.col {
+    padding: .4em 1.3em;
+}
+
+.color-dark {
+    background: #673ab7;
+}
+
+.color-light {
+    background: #78b2ff;
+}
