@@ -22,6 +22,14 @@ export class TCC {
   abstract: string;
   date: Date;
   fileID: number;
+
+  constructor(){
+    this.title = "";
+    this.approved = false;
+    this.keywords = [''];
+    this.abstract = "";
+    this.date = new Date();
+  }
 }
 
 @Injectable({
@@ -85,6 +93,44 @@ export class TccDataService {
     }
 
     return new TCC();
+  }
+
+  /*If a tcc exists, update it with new data. 
+  If it does not, create a new one.*/
+
+  getUnusedID(): number{
+    let current_ids = new Set();
+    for (let i in this.tccs){
+      current_ids.add(this.tccs[i].id)
+    }
+    let i: number = 0;
+    while (current_ids.has(i)){
+      i = i + 1
+    }
+    return i;
+  }
+
+  /**
+   * If the TCC ID is -1, append a new TCC.
+   * If it is >= 0, update an existing TCC.
+   * @param tcc TCC object to update or add
+   */
+  updateTCC(tcc: TCC) {
+    if (tcc.id >= 0){
+      let tcc_index: number = -1;
+      for (let i in this.tccs){
+        if (this.tccs[i].id == tcc.id){
+          tcc_index = Number(i);
+        }
+      }
+      this.tccs[tcc_index] = tcc;
+    }else{
+      /*new TCCs come with a -1 ID, give it a valid ID*/
+      tcc.id = this.getUnusedID();
+      this.tccs.push(tcc)
+    }
+
+    return tcc.id;
   }
 
   deleteTCCbyAuthor(user_id: Number) {

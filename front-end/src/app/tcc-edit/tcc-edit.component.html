@@ -1,1 +1,71 @@
-<p>tcc-edit works!</p>
+<div class="container color-dark">
+    <div class="col">
+        <form>
+            <table id="crud_table">
+                <tr>
+                    <td class="crud_field_label"><p>Título</p></td>
+                    <td>
+                        <input type="text" class="text_input" name="title_input" 
+                        [(ngModel)]="current_tcc.title" value="{{current_tcc.title}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label"><p>Resumo</p></td>
+                    <td>
+                        <textarea rows="5" class="text_input" name="abstract_input" 
+                        [(ngModel)]="current_tcc.abstract" value="{{current_tcc.abstract}}">
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label"><p>Palavras-chave</p></td>
+                    <td>
+                        <input type="text" class="text_input" name="keywd_input" 
+                        [(ngModel)]="keywordsStr" value="{{keywordsStr}}">
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label"></td>
+                    <td><p>Separar por ";" </p></td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label">Autor</td>
+                    <td>
+                        <select name="author_input" 
+                            [(ngModel)]="authorSelectValue" value="{{authorSelectValue}}">
+                            <option *ngFor="let user of studentList" 
+                                [value]="user.id">
+                              {{user.email}}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label">Orientador</td>
+                    <td>
+                        <select name="professor_input" 
+                            [(ngModel)]="professorSelectValue" 
+                            value="{{professorSelectValue}}">
+                            <option *ngFor="let user of professorList" 
+                                [value]="user.id">
+                              {{user.email}}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label">
+                        <input type="submit" class="btn" 
+                        value="Enviar" (click)="updateTCC()">
+                    </td>
+                </tr>
+            </table>
+            
+            
+        </form>
+    </div>
+    <div class="col">
+        
+    </div>
+</div>

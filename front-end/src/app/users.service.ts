@@ -46,6 +46,16 @@ export class UsersService {
     return this.users;
   }
 
+  obtainUsersOfType(user_type: string): User[]{
+    let students: User[] = new Array();
+    for (let user of this.users){
+      if (user_type == user.user_type){
+        students.push(user);
+      }
+    }
+    return students;
+  }
+
   obtainUser(id: Number): User{
     for (let user of this.users){
       if (id == user.id){
@@ -54,6 +64,21 @@ export class UsersService {
     }
 
     return new User();
+  }
+
+  updateUser(user: User) {
+    let user_index: number = -1;
+    for (let i in this.users){
+      if (this.users[i].id == user.id){
+        user_index = Number(i);
+      }
+    }
+
+    if (user_index >= 0){
+      this.users[user_index] = user;
+    }else{
+      this.users.push(user)
+    }
   }
 
   deleteUser(user_id: Number){

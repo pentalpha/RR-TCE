@@ -22,7 +22,7 @@ export class TccPageComponent implements OnInit {
     public userService: UsersService) {
       this.current_id = 'No ID';
       this.route.params.subscribe(res => this.current_id = res.id);
-      this.current_tcc = tccService.obtainTCC(Number(this.current_id));
+      this.current_tcc = this.tccService.obtainTCC(Number(this.current_id));
       this.author = this.userService.obtainUser(this.current_tcc.author_id).name;
       this.professor = this.userService.obtainUser(this.current_tcc.professor_id).name;
       if (this.current_tcc.approved){
