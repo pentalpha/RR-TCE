@@ -86,4 +86,16 @@ export class TccDataService {
 
     return new TCC();
   }
+
+  deleteTCCbyAuthor(user_id: Number) {
+    let index_to_erase: number = -1;
+    for (let i in this.tccs){
+      if (this.tccs[i].author_id == user_id){
+        index_to_erase = Number(i);
+      }
+    }
+    if (index_to_erase >= 0){
+      this.tccs.splice(index_to_erase, 1);
+    }
+  }
 }

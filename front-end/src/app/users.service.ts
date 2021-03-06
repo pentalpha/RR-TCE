@@ -55,4 +55,16 @@ export class UsersService {
 
     return new User();
   }
+
+  deleteUser(user_id: Number){
+    let index_to_erase: number = -1;
+    for (let i in this.users){
+      if (this.users[i].id == user_id){
+        index_to_erase = Number(i);
+      }
+    }
+    if (index_to_erase >= 0){
+      this.users.splice(index_to_erase, 1);
+    }
+  }
 }

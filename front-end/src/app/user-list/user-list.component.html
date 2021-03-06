@@ -1,0 +1,22 @@
+<div class="container color-dark">
+    <div class="col">
+        <h3>Usuários:</h3>
+        <table id="listTCCsTable">
+            <tr *ngFor="let user of userList">
+                <td>{{ user.user_type }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a [routerLink]="['/user', user.id]">
+                        <strong>{{ user.name }}</strong>
+                    </a>
+                </td>
+                <td>
+                    <form>
+                        <input type="submit" class="btn" 
+                            value="Excluir" (click)="deleteUser(user.id)">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,23 +1,4 @@
-input.txt {
-    border: 0;
-    padding: .5em;
-    width: 9em;
-}
 
-input.btn {
-    border: 0;
-    padding: .5em 0.3em;
-    background: #A5F883;
-    color: #003A61;
-}
-
-#loginButton {
-    border: 0;
-    padding: .5em 0.3em;
-    background: #A5F883;
-    color: #003A61;
-    margin-right: 1em;
-}
 
 .headerLink {
     color: #fff;
