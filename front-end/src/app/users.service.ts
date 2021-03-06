@@ -14,19 +14,21 @@ export class User {
 export class UsersService {
   private users: User[] = new Array();
   constructor() {
-    let user_ids = [0,1,2,3,4,5];
+    let user_ids = [0,1,2,3,4,5,6];
     let user_names = ["Joir Medeiros Medeiros",
       "Ronaldo de Figueiredo Silveira", "Marcel Vinicius Medeiros Oliveira",
-      "Monica Magalhães Pereira", "Lucas Torres de Souza", "admin"
+      "Monica Magalhães Pereira", "Lucas Torres de Souza", "admin",
+      "José Gameleira do Rêgo Neto"
     ];
     let user_type = ["STUDENT", "STUDENT", "PROFESSOR", "PROFESSOR", "STUDENT",
-      "ADMIN"
+      "ADMIN", "STUDENT"
     ];
     let user_mail = ["joir@gmail.com", "ronis@gmail.com", "marcel@gmail.com", 
-      "monica@gmail.com", "torres@gmail.com", "admin@gmail.com"
+      "monica@gmail.com", "torres@gmail.com", "admin@gmail.com",
+      "gameleira@gmail.com"
     ];
     let user_passwd = ["1234", "1234", "1234", 
-      "1234", "1234", "1234"
+      "1234", "1234", "1234", "1234"
     ];
 
     for (let i in user_ids) {

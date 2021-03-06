@@ -41,3 +41,7 @@ footer p{
     max-height: 45px;
     margin-right: 1em;
 }
+
+mat-toolbar{
+    min-height: 4em;
+}

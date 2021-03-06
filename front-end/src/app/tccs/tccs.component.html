@@ -1,15 +1,14 @@
 <div class="container color-dark">
     <div class="col">
-        <h3>Últimos TCCs publicados:</h3>
+        <h3>Resultado da busca:</h3>
         <table id="listTCCsTable">
-            <tr *ngFor="let tcc of lastTCCs">
+            <tr *ngFor="let tcc of resultTCCs">
                 <td>{{ tcc.date | date: 'dd/MM/yyyy' }}</td>
-                <td><a [routerLink]="['tcc', tcc.id]">
+                <td><a [routerLink]="['/tcc', tcc.id]">
                     <strong>{{ tcc.title }}</strong>
+                    <p>{{ getAuthor(tcc.author_id) }}</p>
                 </a></td>
             </tr>
         </table>
-
-        <a routerLink="tccs/"><div class="seeAllButton" >+ Ver Todos</div></a>
     </div>
 </div>

@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexBodyComponent } from './index-body/index-body.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { TccPageComponent } from './tcc-page/tcc-page.component'; 
+import { TccPageComponent } from './tcc-page/tcc-page.component';
+import { TccsComponent } from './tccs/tccs.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexBodyComponent,
-    TccPageComponent
+    TccPageComponent,
+    TccsComponent
   ],
   imports: [
     BrowserModule,

@@ -31,3 +31,29 @@ a {
 .color-light {
     background: #78b2ff;
 }
+
+#listTCCsTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#listTCCsTable td, #listTCCsTable th{
+    /*border: 1px solid #ddd;*/
+    padding: 1em;
+
+}
+
+#listTCCsTable tr:nth-child(even){background-color: #00f7ff7c;}
+#listTCCsTable tr:nth-child(odd){background-color: #c300ff77;}
+
+#listTCCsTable tr:hover {
+    background-color: #ffffff3d;
+}
+
+#yellowButton {
+    border: 0;
+    padding: .5em 0.3em;
+    background: #A5F883;
+    color: #003A61;
+    margin-right: 1em;
+}

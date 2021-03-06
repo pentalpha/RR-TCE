@@ -1,16 +1,7 @@
-#lastTCCsTable {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#lastTCCsTable td, #lastTCCsTable th{
-    /*border: 1px solid #ddd;*/
-    padding: 1em;
-}
-
-#lastTCCsTable tr:nth-child(even){background-color: #00f7ff7c;}
-#lastTCCsTable tr:nth-child(odd){background-color: #c300ff77;}
-
-#lastTCCsTable tr:hover {
-    background-color: #ffffff3d;
+.seeAllButton{
+    padding: .5em 0.3em;
+    background: #A5F883;
+    color: #003A61;
+    width: 99%;
+    text-align: center;
 }

@@ -19,7 +19,7 @@ export class TccPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
     private router: Router, 
     private tccService: TccDataService,
-    private userService: UsersService) {
+    public userService: UsersService) {
       this.current_id = 'No ID';
       this.route.params.subscribe(res => this.current_id = res.id);
       this.current_tcc = tccService.obtainTCC(Number(this.current_id));
