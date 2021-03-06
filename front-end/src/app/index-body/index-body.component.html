@@ -1,19 +1,12 @@
-<div class="container color-light">
-    <div class="col">
-        <form>
-            <input type="text" class="txt" name="item" placeholder="Título, palavra-chave, autor..." [(ngModel)]="searchText">
-            <input type="submit" class="btn" value="Buscar" (click)="searchTCCs()">
-        </form>
-    </div>
-</div>
-
 <div class="container color-dark">
     <div class="col">
         <h3>Últimos TCCs publicados:</h3>
         <table id="lastTCCsTable">
             <tr *ngFor="let tcc of lastTCCs">
                 <td>{{ tcc.date | date: 'dd/MM/yyyy' }}</td>
-                <td><strong>{{ tcc.title }}</strong></td>
+                <td><a [routerLink]="['tcc', tcc.id]">
+                    <strong>{{ tcc.title }}</strong>
+                </a></td>
             </tr>
         </table>
     </div>

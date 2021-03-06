@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 export class User {
   id: number;
   name: string;
+  email: string;
   user_type: string;
+  passwd: string;
 }
 
 @Injectable({
@@ -20,12 +22,20 @@ export class UsersService {
     let user_type = ["STUDENT", "STUDENT", "PROFESSOR", "PROFESSOR", "STUDENT",
       "ADMIN"
     ];
+    let user_mail = ["joir@gmail.com", "ronis@gmail.com", "marcel@gmail.com", 
+      "monica@gmail.com", "torres@gmail.com", "admin@gmail.com"
+    ];
+    let user_passwd = ["1234", "1234", "1234", 
+      "1234", "1234", "1234"
+    ];
 
     for (let i in user_ids) {
       let new_user = new User();
       new_user.id = user_ids[i];
       new_user.name = user_names[i];
       new_user.user_type = user_type[i];
+      new_user.email = user_mail[i];
+      new_user.passwd = user_passwd[i];
       this.users.push(new_user)
     }
   }

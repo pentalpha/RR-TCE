@@ -1,6 +1,32 @@
-<ul class="menu-list">
-    <li><a routerLink="">Repositório da Residência em TI</a></li>
-    <li><a routerLink="login">Login</a></li>
-</ul>
+<p>
+    <mat-toolbar color="primary">
+        <span><a id="homeLink" class="active headerLink" routerLink="">
+            <strong>RR-TCE</strong></a></span>
+        <span class="example-spacer"></span>
+        <span><a class="headerLink" id='loginButton' href="#">Login</a></span>
+        <span>
+            <form>
+                <input type="text" class="txt" name="item" 
+                    placeholder="Título, autor..." [(ngModel)]="searchText">
+            </form>
+        </span>
+        <span>
+            <form>
+                <input type="submit" class="btn" value="Buscar" (click)="searchTCCs()">
+            </form>
+        </span>
+    </mat-toolbar>
+</p>
 
 <router-outlet></router-outlet>
+
+<footer>
+    <mat-toolbar color="primary">
+        <img class="logoImage" src="assets/tce_logo.png">
+        <img class="logoImage" src="assets/imd_logo.png">
+        <span class="example-spacer"></span>
+        <span>
+            <p>UFRN Copyright © 2021</p>
+        </span>
+    </mat-toolbar>
+</footer>

@@ -4,8 +4,11 @@ import { IndexBodyComponent } from './index-body/index-body.component'
 
 const routes: Routes = [{
   path: '',
-  component: IndexBodyComponent
-}
+    component: IndexBodyComponent
+  },
+  {path: 'tcc/:id',
+    component: IndexBodyComponent
+  }
 ];
 
 @NgModule({

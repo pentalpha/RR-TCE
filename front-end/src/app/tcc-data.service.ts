@@ -30,7 +30,7 @@ export class TccDataService {
   constructor() {
     let tcc_ids = [0, 1, 2];
     let tcc_titles = ["Nova Arquitetura de ambientes de bases de dados do Tribunal"
-      +"de Contas do Estado do Rio Grande do Norte", 
+      +" de Contas do Estado do Rio Grande do Norte", 
       "Projeto e implementação de um acelerador de arquitetura reconfigurável",
       "Procedural terrain generation through image completion using GANs"
     ];
@@ -45,7 +45,7 @@ export class TccDataService {
     ];
     let tcc_abstracts = [lorem.generateParagraphs(1), lorem.generateParagraphs(1),
       lorem.generateParagraphs(1)];
-    let tcc_dates = [new Date(2019, 7, 23), new Date(2019, 6, 10), new Date(2019, 7, 23)];
+    let tcc_dates = [new Date(2019, 8, 23), new Date(2019, 6, 10), new Date(2019, 7, 23)];
 
     for (let i in tcc_ids) {
       let new_tcc = new TCC();

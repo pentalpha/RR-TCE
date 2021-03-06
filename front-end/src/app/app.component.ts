@@ -11,4 +11,10 @@ export class AppComponent {
   title = 'front-end';
   users = new UsersService().obtainUsers();
   tccs = new TccDataService().obtainTCCs();
+  searchText: string = "";
+  
+  searchTCCs(){
+
+  }
+  
 }
