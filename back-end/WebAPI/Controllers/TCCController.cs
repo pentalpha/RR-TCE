@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using WebAPI.Models;
+using WebAPI.Entities;
 
 namespace WebAPI.Controllers
 {
@@ -79,13 +80,13 @@ namespace WebAPI.Controllers
                     (title, author_id, professor_id, approved, keywords, abstract, date_creation)
                     values
                     (
-                     '" + tcc.title + @"'
-                    ,'" + tcc.author_id + @"'
-                    ,'" + tcc.professor_id + @"'
-                    ,'" + tcc.approved + @"'
-                    ,'" + tcc.keywords + @"'
-                    ,'" + tcc.abstract_text + @"'
-                    ,'" + tcc.date_creation + @"'
+                     '" + tcc.Title + @"'
+                    ,'" + tcc.AuthorId + @"'
+                    ,'" + tcc.ProfessorId + @"'
+                    ,'" + tcc.Approved + @"'
+                    ,'" + tcc.Keywords + @"'
+                    ,'" + tcc.Abstract + @"'
+                    ,'" + tcc.DateCreation + @"'
                     )
                     ";
             DataTable table = new DataTable();
@@ -113,14 +114,14 @@ namespace WebAPI.Controllers
         { 
             string query = @"
                     update dbo.TCC set 
-                    title = '" + tcc.title + @"'
-                    ,author_id = '" + tcc.author_id + @"'
-                    ,professor_id = '" + tcc.professor_id + @"'
-                    ,approved = '" + tcc.approved + @"'
-                    ,keywords = '" + tcc.keywords + @"'
-                    ,abstract = '" + tcc.abstract_text + @"'
-                    ,date_creation = '" + tcc.date_creation + @"'
-                    where id = " + tcc.id + @"
+                    title = '" + tcc.Title + @"'
+                    ,author_id = '" + tcc.AuthorId + @"'
+                    ,professor_id = '" + tcc.ProfessorId + @"'
+                    ,approved = '" + tcc.Approved + @"'
+                    ,keywords = '" + tcc.Keywords + @"'
+                    ,abstract = '" + tcc.Abstract + @"'
+                    ,date_creation = '" + tcc.DateCreation + @"'
+                    where id = " + tcc.Id + @"
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
