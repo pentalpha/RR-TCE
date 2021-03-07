@@ -1,1 +1,23 @@
-<p>login works!</p>
+
+<div class="container color-dark">
+    <div class="col">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div>
+                <label>ID</label>
+                <div>
+                    <input id="id" formControlName ="id" name="id" type="text">
+                </div>
+            </div>
+            <div>
+                <label>Chave de Acesso</label>
+                <div>
+                    <input id="chave" formControlName="chave" name="chave" type="password">
+                </div>
+            </div>
+            <div></div>
+            <div>
+                <button>Login</button>
+            </div>
+        </form>
+    </div>
+</div>
