@@ -1,0 +1,11 @@
+.tccButton{
+    padding: .5em 0.3em;
+    background: #A5F883;
+    color: #003A61;
+    width: 10em;
+    text-align: center;
+}
+
+.updateUser{
+    width: 100%;
+}

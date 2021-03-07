@@ -1,1 +1,76 @@
-<p>user-edition works!</p>
+<div class="container color-dark">
+    <div class="col">
+        <h3>Informações de Usuário:</h3>
+        <form>
+            <table id="crud_table">
+                <tr>
+                    <td class="crud_field_label"><p>E-Mail</p></td>
+                    <td>
+                        <input type="email" class="text_input" name="mail_input" 
+                            [(ngModel)]="current_user.email" value="{{current_user.email}}"
+                            minlength="6" maxlength="48" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label"><p>Nome Completo</p></td>
+                    <td>
+                        <input type="text" class="text_input" name="name_input" 
+                            [(ngModel)]="current_user.name" value="{{current_user.name}}"
+                            minlength="3" maxlength="140" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label"><p>Senha</p></td>
+                    <td>
+                        <input type="password" class="text_input" name="keywd_input" 
+                            [(ngModel)]="current_user.passwd" value="{{current_user.passwd}}"
+                            minlength="4" maxlength="24" required>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="crud_field_label"></td>
+                    <td>
+                        <input type="submit" class="btn updateUser" 
+                        value="Atualizar" (click)="updateUser()">
+                        <p>{{error_str}}</p>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div *ngIf="current_user.user_type == 'STUDENT'">
+            <h3>Trabalho de Conclusão de Curso:</h3>
+            <a [routerLink]="['/tccedit/', user_tcc_id, current_user.id]">
+                <div class="tccButton">
+                    Ir para TCC
+                </div>
+            </a>
+        </div>
+
+        <div *ngIf="current_user.user_type == 'PROFESSOR'">
+            <h3>Trabalhos de Conclusão de Curso:</h3>
+            <table id="listTCCsTable">
+                <tr *ngFor="let tcc of prof_tccs">
+                    <td>{{ tcc.date | date: 'dd/MM/yyyy' }}</td>
+                    <td>
+                        <a [routerLink]="['/tcc', tcc.id]">
+                            <p>{{ getAuthor(tcc.author_id) }}</p>
+                            <p>{{ tcc.title }}</p>
+                        </a>
+                    </td>
+                    <td>
+                        <div *ngIf="tcc.approved">
+                            <input type="submit" class="btn" value="Reprovar" 
+                                (click)="updateTccStatus(tcc.id, false)">
+                        </div>
+                        <div *ngIf="!tcc.approved">
+                            <input type="submit" class="btn" value="Aprovar" 
+                                (click)="updateTccStatus(tcc.id, true)">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

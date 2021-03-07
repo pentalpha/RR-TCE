@@ -21,7 +21,7 @@ export class UserListComponent implements OnInit {
     this.userList = this.userService.obtainUsers();
   }
 
-  deleteUser(user_id: Number){
+  deleteUser(user_id: number){
     this.userService.deleteUser(user_id);
     this.tccService.deleteTCCbyAuthor(user_id);
     this.updateUsers();

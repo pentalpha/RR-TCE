@@ -16,7 +16,7 @@ const routes: Routes = [{
   {path: 'tccedit/:id',
     component: TccEditComponent
   },
-  {path: 'tccedit/:id:author',
+  {path: 'tccedit/:id/:author',
     component: TccEditComponent},
   {path: 'tccs',
     component: TccsComponent},

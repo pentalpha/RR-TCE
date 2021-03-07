@@ -61,7 +61,7 @@ a {
 input.txt {
     border: 0;
     padding: .5em;
-    width: 9em;
+    width: 7em;
 }
 
 input.btn {
@@ -76,6 +76,10 @@ input.btn {
     border: 0;
     padding: .5em;
     width: 100%;
+}
+
+.text_input:invalid {
+    border: 2px dashed red;
 }
 
 #crud_table{

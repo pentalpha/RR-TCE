@@ -95,6 +95,17 @@ export class TccDataService {
     return new TCC();
   }
 
+  obtainTCCsByProfessor(prof_id: Number): TCC[]{
+    let prof_tccs: TCC[] = new Array();
+    for (let tcc of this.tccs){
+      if (prof_id == tcc.professor_id){
+        prof_tccs.push(tcc);
+      }
+    }
+
+    return prof_tccs;
+  }
+
   /*If a tcc exists, update it with new data. 
   If it does not, create a new one.*/
 
@@ -133,7 +144,7 @@ export class TccDataService {
     return tcc.id;
   }
 
-  deleteTCCbyAuthor(user_id: Number) {
+  deleteTCCbyAuthor(user_id: number) {
     let index_to_erase: number = -1;
     for (let i in this.tccs){
       if (this.tccs[i].author_id == user_id){
@@ -143,5 +154,14 @@ export class TccDataService {
     if (index_to_erase >= 0){
       this.tccs.splice(index_to_erase, 1);
     }
+  }
+
+  getTccIDbyAuthor(user_id: number): number {
+    for (let i in this.tccs){
+      if (this.tccs[i].author_id == user_id){
+        return this.tccs[i].id
+      }
+    }
+    return -1;
   }
 }
