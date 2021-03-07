@@ -1,1 +1,53 @@
-<p>create-user works!</p>
+<div class="container color-dark">
+    <div class="col">
+        <h3>Informações de Usuário:</h3>
+        <form>
+            <table id="crud_table">
+                <tr>
+                    <td class="crud_field_label"><p>E-Mail</p></td>
+                    <td>
+                        <input type="email" class="text_input" name="mail_input" 
+                            [(ngModel)]="email" value="{{email}}"
+                            minlength="6" maxlength="48" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label"><p>Nome Completo</p></td>
+                    <td>
+                        <input type="text" class="text_input" name="name_input" 
+                            [(ngModel)]="name" value="{{name}}"
+                            minlength="3" maxlength="140" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label"><p>Senha</p></td>
+                    <td>
+                        <input type="password" class="text_input" name="keywd_input" 
+                            [(ngModel)]="passwd" value="{{passwd}}"
+                            minlength="4" maxlength="24" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label">Autor</td>
+                    <td>
+                        <select name = "author_input" 
+                            [(ngModel)] = "authorSelectValue" 
+                            value = "{{authorSelectValue}}">
+                            <option value="STUDENT">Aluno</option>
+                            <option value="PROFESSOR">Orientador</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="crud_field_label"></td>
+                    <td>
+                        <input type="submit" class="btn createUser" 
+                            value="Criar" (click)="createUser()">
+                        <p>{{error_str}}</p>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

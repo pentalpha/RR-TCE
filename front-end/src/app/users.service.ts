@@ -46,6 +46,15 @@ export class UsersService {
     return this.users;
   }
 
+  emailIsUsed(new_email: string): boolean{
+    for (let user of this.users){
+      if (new_email == user.email){
+        return true;
+      }
+    }
+    return false;
+  }
+
   obtainUsersOfType(user_type: string): User[]{
     let students: User[] = new Array();
     for (let user of this.users){
@@ -66,17 +75,29 @@ export class UsersService {
     return new User();
   }
 
-  updateUser(user: User) {
-    let user_index: number = -1;
+  getUnusedID(): number{
+    let current_ids = new Set();
     for (let i in this.users){
-      if (this.users[i].id == user.id){
-        user_index = Number(i);
-      }
+      current_ids.add(this.users[i].id)
     }
+    let i: number = 0;
+    while (current_ids.has(i)){
+      i = i + 1
+    }
+    return i;
+  }
 
-    if (user_index >= 0){
+  updateUser(user: User) {
+    if (user.id >= 0){
+      let user_index: number = -1;
+      for (let i in this.users){
+        if (this.users[i].id == user.id){
+          user_index = Number(i);
+        }
+      }
       this.users[user_index] = user;
     }else{
+      user.id = this.getUnusedID();
       this.users.push(user)
     }
   }

@@ -7,12 +7,16 @@ import { TccsComponent } from './tccs/tccs.component'
 import { UserListComponent } from './user-list/user-list.component'
 import { UserEditionComponent } from './user-edition/user-edition.component'
 import { LoginComponent } from "./login/login.component"
+import { CreateUserComponent } from "./create-user/create-user.component"
+
 const routes: Routes = [{
   path: '',
     component: IndexBodyComponent
   },
   {path: 'login',
     component: LoginComponent},
+  {path: 'createuser',
+    component: CreateUserComponent},
   {path: 'tcc/:id',
     component: TccPageComponent
   },
