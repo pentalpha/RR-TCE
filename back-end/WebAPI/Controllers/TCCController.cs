@@ -45,6 +45,32 @@ namespace WebAPI.Controllers
             return new JsonResult(table);
         }
 
+        [HttpGet("professorId/{id}")]
+        public JsonResult GetTCCByProfessorId(int id)
+        {
+            string query = @"
+                    select id, title, author_id, professor_id, approved, keywords, abstract, date_creation from dbo.TCC"
+                    + @" where professor_id = " + id + @"
+                    ";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
         [HttpPost]
         public JsonResult Post(TCC tcc)
         {
