@@ -55,9 +55,24 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="crud_field_label">Documento do TCC</td>
+                    <td>
+                        <a [href]="getFile()"><strong>Baixar</strong></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="crud_field_label">Atualizar arquivo:</td>
+                    <td>
+                        <input type="file" (change)="selectFile($event)" class='btn'>
+                    </td>
+                </tr>
+                <tr>
                     <td class="crud_field_label">
                         <input type="submit" class="btn" 
                         value="Enviar" (click)="updateTCC()">
+                    </td>
+                    <td>
+                        {{error_str}}
                     </td>
                 </tr>
             </table>

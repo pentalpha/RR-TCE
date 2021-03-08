@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { TCC, TccDataService } from '../tcc-data.service';
 import { User, UsersService } from '../users.service';
+import {FileEntry, FileService} from "../file.service";
+
 @Component({
   selector: 'app-tcc-page',
   templateUrl: './tcc-page.component.html',
@@ -19,7 +21,8 @@ export class TccPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
     private router: Router, 
     private tccService: TccDataService,
-    public userService: UsersService) {
+    public userService: UsersService,
+    private fileService: FileService) {
       this.current_id = 'No ID';
       this.route.params.subscribe(res => this.current_id = res.id);
       this.current_tcc = this.tccService.obtainTCC(Number(this.current_id));
@@ -37,7 +40,7 @@ export class TccPageComponent implements OnInit {
   }
 
   getFile(fileID: Number): string{
-    return "";
+    return this.fileService.getDownloadLink(fileID);
   }
 
 }

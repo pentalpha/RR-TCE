@@ -29,6 +29,7 @@ export class TCC {
     this.keywords = [''];
     this.abstract = "";
     this.date = new Date();
+    this.fileID = -1;
   }
 }
 
@@ -61,6 +62,7 @@ export class TccDataService {
       lorem.generateParagraphs(1), lorem.generateParagraphs(1)];
     let tcc_dates = [new Date(2019, 8, 23), new Date(2019, 6, 10), new Date(2019, 7, 23),
       new Date(2019, 6, 13)];
+    let fileIDs = [0, 1, 2, 3];
 
     for (let i in tcc_ids) {
       let new_tcc = new TCC();
@@ -72,6 +74,7 @@ export class TccDataService {
       new_tcc.abstract = tcc_abstracts[i];
       new_tcc.date = tcc_dates[i];
       new_tcc.approved = false;
+      new_tcc.fileID = fileIDs[i];
       this.tccs.push(new_tcc)
     }
   }
