@@ -3,8 +3,9 @@
     "",
     "\\WebAPI",
     "\\WebAPI\\Controllers",
-    "\\WebAPI\\Models"
+    "\\WebAPI\\Models",
+    "\\WebAPI\\Services"
   ],
-  "SelectedNode": "\\WebAPI\\Startup.cs",
+  "SelectedNode": "\\WebAPI\\Services\\TokenService.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -4012,19 +4012,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
+    "C:\\Users\\pitagoras\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\Projetos\\RR-TCE\\back-end\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "D:\\UFRN\\residencia\\web_dev\\RR-TCE\\back-end\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\Projetos\\RR-TCE\\back-end\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\Projetos\\RR-TCE\\back-end\\WebAPI\\obj\\",
+      "projectPath": "D:\\UFRN\\residencia\\web_dev\\RR-TCE\\back-end\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\pitagoras\\.nuget\\packages\\",
+      "outputPath": "D:\\UFRN\\residencia\\web_dev\\RR-TCE\\back-end\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pitagoras\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4089,7 +4089,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,5 +1,3 @@
-CREATE DATABASE RRTCEDB;
-
 CREATE TABLE Usuario (
 id int IDENTITY(1,1) NOT NULL,
 username VARCHAR(60) NOT NULL,
@@ -17,7 +15,8 @@ professor_id INT NOT NULL,
 approved BIT default 'FALSE',
 keywords VARCHAR(160),
 abstract VARCHAR(500),
-date_creation DATE ,
+date_creation DATE,
+fileID INT NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (author_id) REFERENCES Usuario(id),
 FOREIGN KEY (professor_id) REFERENCES Usuario(id),
