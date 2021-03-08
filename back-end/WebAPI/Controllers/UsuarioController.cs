@@ -8,6 +8,15 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using WebAPI.Models;
+using WebAPI.Services;
+using System.Text.Json;
+using Newtonsoft.Json;
+using WebAPI.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using Jose;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebAPI.Controllers
 {
@@ -16,10 +25,46 @@ namespace WebAPI.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private string logUsuario = "LogUsuario";
 
         public UsuarioController(IConfiguration configuration)
         {
             _configuration = configuration;
+        }
+
+        [HttpPost]
+        [Route("login")]
+        [AllowAnonymous]
+        public async Task<ActionResult<dynamic>> Authenticate(Usuario model)
+        {
+            // Recupera o usuário
+            /*var userJson = UserRepository.Get(model.Username, model.Password);*/
+            var userTable = GetUserByUsername(model.username, model.passwd);
+
+            var users = CommonMethod.ConvertToList<Usuario>(userTable);
+
+            // Verifica se retornou mais de 1 usuário com mesmo username
+            if (users.Count > 1)
+                return NotFound(new { message = "Há mais de 1 usuário com mesmo username. Entre em contato com os administradores do sistema" });
+
+            // Verifica se o usuário existe
+            if (users == null || users.Count == 0)
+                return NotFound(new { message = "Usuário ou senha inválidos" });
+
+            var user = users[0];
+
+            // Gera o Token
+            var token = TokenService.GenerateToken(user);
+
+            // Oculta a senha
+            user.passwd = "";
+
+            // Retorna os dados
+            return new
+            {
+                user = user,
+                token = token
+            };
         }
 
         public JsonResult Get()
@@ -42,6 +87,57 @@ namespace WebAPI.Controllers
                 }
             }
 
+            return new JsonResult(table);
+        }
+
+        /*[HttpGet("username/{name}")]*/
+        private DataTable GetUserByUsername(string name, string password)
+        {
+            string query = @"
+                    select id, username, usertype, email from dbo.Usuario" + @"
+                    where username = '" + name + @"' 
+                    and passwd = '" + password + @"'
+                    ";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return table;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public JsonResult GetUserById(int id)
+        {
+            string query = @"
+                    select id, username, usertype, email from dbo.Usuario" + @"
+                    where id = " + id ;
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
             return new JsonResult(table);
         }
 
@@ -75,6 +171,7 @@ namespace WebAPI.Controllers
                 }
             }
 
+            CommonMethod.registrarLog(sqlDataSource, logUsuario, "Criado o usuário com nome = " + usuario.username, 0);
             return new JsonResult("Added Successfully");
         }
 
@@ -106,11 +203,13 @@ namespace WebAPI.Controllers
                 }
             }
 
+            CommonMethod.registrarLog(sqlDataSource, logUsuario, "Atualizado o usuário com nome = " + usuario.username, 0);
             return new JsonResult("Updated Successfully");
         }
 
-        
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("{id}")]
+        [Authorize(Roles = "ADMIN")]
         public JsonResult Delete(int id)
         {
             string query = @"
@@ -132,6 +231,22 @@ namespace WebAPI.Controllers
                     myCon.Close();
                 }
             }
+
+            string usertoken = Request.Headers["Authorization"];
+            var token = usertoken.Split(' ');
+
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+            var claims = handler.ValidateToken(token[1], validations, out var tokenSecure);
+            var usuarioId = claims.Identity.Name;
+            CommonMethod.registrarLog(sqlDataSource, logUsuario, "Deletado o usuário com ID = " + id, Int16.Parse(usuarioId));
 
             return new JsonResult("Deleted Successfully");
         }
