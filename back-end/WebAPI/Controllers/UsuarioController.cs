@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using WebAPI.Models;
+using WebAPI.Services;
+using System.Text.Json;
+using Newtonsoft.Json;
+using WebAPI.Helpers;
 
 namespace WebAPI.Controllers
 {
@@ -20,6 +24,40 @@ namespace WebAPI.Controllers
         public UsuarioController(IConfiguration configuration)
         {
             _configuration = configuration;
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult<dynamic>> Authenticate(Usuario model)
+        {
+            // Recupera o usuário
+            /*var userJson = UserRepository.Get(model.Username, model.Password);*/
+            var userTable = GetUserByUsername(model.username, model.passwd);
+
+            var users = CommonMethod.ConvertToList<Usuario>(userTable);
+
+            // Verifica se retornou mais de 1 usuário com mesmo username
+            if (users.Count > 1)
+                return NotFound(new { message = "Há mais de 1 usuário com mesmo username. Entre em contato com os administradores do sistema" });
+
+            // Verifica se o usuário existe
+            if (users == null || users.Count == 0)
+                return NotFound(new { message = "Usuário ou senha inválidos" });
+
+            var user = users[0];
+
+            // Gera o Token
+            var token = TokenService.GenerateToken(user);
+
+            // Oculta a senha
+            user.passwd = "";
+
+            // Retorna os dados
+            return new
+            {
+                user = user,
+                token = token
+            };
         }
 
         public JsonResult Get()
@@ -43,6 +81,32 @@ namespace WebAPI.Controllers
             }
 
             return new JsonResult(table);
+        }
+
+        /*[HttpGet("username/{name}")]*/
+        private DataTable GetUserByUsername(string name, string password)
+        {
+            string query = @"
+                    select id, username, usertype, email from dbo.Usuario" + @"
+                    where username = '" + name + @"' 
+                    and passwd = '" + password + @"'
+                    ";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return table;
         }
 
         [HttpPost]
