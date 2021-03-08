@@ -22,5 +22,7 @@ namespace WebAPI.Models
         public string abstract_text { get; set; }
 
         public DateTime date_creation { get; set; }
+
+        public int fileID { get; set; }
     }
 }

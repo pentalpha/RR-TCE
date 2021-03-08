@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select id, title, author_id, professor_id, approved, keywords, abstract, date_creation from dbo.TCC";
+                    select id, title, author_id, professor_id, approved, keywords, abstract, date_creation, fileID from dbo.TCC";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
             SqlDataReader myReader;
@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         public JsonResult GetTCCByProfessorId(int id)
         {
             string query = @"
-                    select id, title, author_id, professor_id, approved, keywords, abstract, date_creation from dbo.TCC"
+                    select id, title, author_id, professor_id, approved, keywords, abstract, date_creation, fileID from dbo.TCC"
                     + @" where professor_id = " + id + @"
                     ";
             DataTable table = new DataTable();
@@ -82,7 +82,7 @@ namespace WebAPI.Controllers
         {
             string query = @"
                     insert into dbo.TCC
-                    (title, author_id, professor_id, approved, keywords, abstract, date_creation)
+                    (title, author_id, professor_id, approved, keywords, abstract, date_creation, fileID)
                     values
                     (
                      '" + tcc.title + @"'
@@ -92,6 +92,7 @@ namespace WebAPI.Controllers
                     ,'" + tcc.keywords + @"'
                     ,'" + tcc.abstract_text + @"'
                     ,'" + tcc.date_creation + @"'
+                    ,'" + tcc.fileID + @"'
                     )
                     ";
             DataTable table = new DataTable();
@@ -127,6 +128,7 @@ namespace WebAPI.Controllers
                     ,keywords = '" + tcc.keywords + @"'
                     ,abstract = '" + tcc.abstract_text + @"'
                     ,date_creation = '" + tcc.date_creation + @"'
+                    ,fileID = '" + tcc.fileID + @"'
                     where id = " + tcc.id + @"
                     ";
             DataTable table = new DataTable();
