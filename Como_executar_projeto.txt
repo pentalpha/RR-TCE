@@ -1,0 +1,28 @@
+----------------------- Front-end ----------------------------------------
+1. Abrir prompt;
+2. Pelo prompt vá para o diretório "...\RR-TCE\front-end";
+3. Execute "npm install";
+4. Execute "ng serve";
+
+
+------------------ Back-end de arquivos-----------------------------------
+1. Abrir prompt;
+2. Pelo prompt vá para o diretório "...\RR-TCE\storage";
+3. Execute "npm install";
+4. Execute "npm start";
+
+
+
+----------------------- Back-end -----------------------------------------
+1. Abrir Microsoft Visual Studio;
+2. Abrir arquivo;
+3. Selecione em "...\RR-TCE\back-end\WebAPI.sln";
+4. Aperte "Play WebAPI" como visto na imagem "RR-TCE\playwebapi.png" 
+(disponível no mesmo diretório que este arquivo);
+
+
+----------------------- Postman ------------------------------------------
+Para visualizar exemplos dos serviços disponíveis:
+1. Abrir Postman;
+2. Import;
+3. Selecione o arquivo em "...\RR-TCE\RR-TCE.postman_collection.json".
