@@ -12,6 +12,7 @@ using WebAPI.Services;
 using System.Text.Json;
 using Newtonsoft.Json;
 using WebAPI.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -28,6 +29,7 @@ namespace WebAPI.Controllers
 
         [HttpPost]
         [Route("login")]
+        [AllowAnonymous]
         public async Task<ActionResult<dynamic>> Authenticate(Usuario model)
         {
             // Recupera o usuário
@@ -173,8 +175,15 @@ namespace WebAPI.Controllers
             return new JsonResult("Updated Successfully");
         }
 
-        
-        [HttpDelete("{id}")]
+        [HttpGet]
+        [Route("employee")]
+        [Authorize(Roles = "ADMIN")]
+        public string Employee() => "Funcionário";
+
+
+        [HttpDelete]
+        [Route("{id}")]
+        [Authorize(Roles = "ADMIN")]
         public JsonResult Delete(int id)
         {
             string query = @"
