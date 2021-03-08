@@ -22,3 +22,17 @@ PRIMARY KEY (id),
 FOREIGN KEY (author_id) REFERENCES Usuario(id),
 FOREIGN KEY (professor_id) REFERENCES Usuario(id),
 );
+
+CREATE TABLE LogUsuario (
+id INT IDENTITY(1,1) NOT NULL,
+description_text VARCHAR(200) NOT NULL,
+author_id INT NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE LogTCC (
+id INT IDENTITY(1,1) NOT NULL,
+description_text VARCHAR(200) NOT NULL,
+author_id INT NOT NULL,
+PRIMARY KEY (id)
+);

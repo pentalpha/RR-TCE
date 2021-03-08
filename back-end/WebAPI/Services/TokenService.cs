@@ -20,7 +20,7 @@ namespace WebAPI.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.username.ToString()),
+                    new Claim(ClaimTypes.Name, user.id.ToString()),
                     new Claim(ClaimTypes.Role, user.usertype.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),

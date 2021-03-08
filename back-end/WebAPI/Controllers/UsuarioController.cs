@@ -13,6 +13,10 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using WebAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using Jose;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebAPI.Controllers
 {
@@ -21,6 +25,7 @@ namespace WebAPI.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private string logUsuario = "LogUsuario";
 
         public UsuarioController(IConfiguration configuration)
         {
@@ -166,6 +171,7 @@ namespace WebAPI.Controllers
                 }
             }
 
+            CommonMethod.registrarLog(sqlDataSource, logUsuario, "Criado o usuário com nome = " + usuario.username, 0);
             return new JsonResult("Added Successfully");
         }
 
@@ -197,6 +203,7 @@ namespace WebAPI.Controllers
                 }
             }
 
+            CommonMethod.registrarLog(sqlDataSource, logUsuario, "Atualizado o usuário com nome = " + usuario.username, 0);
             return new JsonResult("Updated Successfully");
         }
 
@@ -224,6 +231,22 @@ namespace WebAPI.Controllers
                     myCon.Close();
                 }
             }
+
+            string usertoken = Request.Headers["Authorization"];
+            var token = usertoken.Split(' ');
+
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+            var claims = handler.ValidateToken(token[1], validations, out var tokenSecure);
+            var usuarioId = claims.Identity.Name;
+            CommonMethod.registrarLog(sqlDataSource, logUsuario, "Deletado o usuário com ID = " + id, Int16.Parse(usuarioId));
 
             return new JsonResult("Deleted Successfully");
         }

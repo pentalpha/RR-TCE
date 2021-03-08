@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,6 +28,31 @@ namespace WebAPI.Helpers
                 }
                 return objT;
             }).ToList();
+        }
+
+        public static void registrarLog(string sqlDataSource, string nomeTabela, string operacao, int id_autor)
+        {
+            string query = @"
+                    insert into dbo." + nomeTabela + @" " + @"
+                    values
+                    (
+                    '" + operacao + @"'
+                    ," + id_autor + @"
+                    )";
+            DataTable table = new DataTable();
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
         }
     }
 }

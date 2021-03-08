@@ -9,6 +9,10 @@ using System.Data.SqlClient;
 using System.Data;
 using WebAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using WebAPI.Helpers;
 
 namespace WebAPI.Controllers
 {
@@ -17,6 +21,7 @@ namespace WebAPI.Controllers
     public class TCCController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private string logTCC = "LogTCC";
 
         public TCCController(IConfiguration configuration)
         {
@@ -105,9 +110,10 @@ namespace WebAPI.Controllers
                 }
             }
 
+            CommonMethod.registrarLog(sqlDataSource, logTCC, "Criado o TCC com title = " + tcc.title, 0);
+
             return new JsonResult("Added Successfully");
         }
-
         
         [HttpPut]
         public JsonResult Put(TCC tcc)
@@ -139,6 +145,8 @@ namespace WebAPI.Controllers
                 }
             }
 
+            CommonMethod.registrarLog(sqlDataSource, logTCC, "Atualizado o TCC com ID = " + tcc.id, 0);
+
             return new JsonResult("Updated Successfully");
         }
 
@@ -168,6 +176,22 @@ namespace WebAPI.Controllers
                 }
             }
 
+            string usertoken = Request.Headers["Authorization"];
+            var token = usertoken.Split(' ');
+
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+            var claims = handler.ValidateToken(token[1], validations, out var tokenSecure);
+            var usuarioId = claims.Identity.Name;
+            CommonMethod.registrarLog(sqlDataSource, logTCC, "Deletado o TCC com ID = " + id, Int16.Parse(usuarioId));
+
             return new JsonResult("Updated Successfully the approved attribute");
         }
 
@@ -194,6 +218,8 @@ namespace WebAPI.Controllers
                     myCon.Close();
                 }
             }
+
+            CommonMethod.registrarLog(sqlDataSource, logTCC, "Deletado o TCC com ID = " + id, 0);
 
             return new JsonResult("Deleted Successfully");
         }
