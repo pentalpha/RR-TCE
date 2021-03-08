@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
@@ -141,7 +142,36 @@ namespace WebAPI.Controllers
             return new JsonResult("Updated Successfully");
         }
 
-        
+        [HttpPut]
+        [Route("{id}/{approved}")]
+        [Authorize(Roles = "PROFESSOR")]
+        public JsonResult AlterarApproved(int id, int approved)
+        {
+            string query = @"
+                    update dbo.TCC set 
+                    approved = " + approved + " " + @"
+                    where id = " + id + @"
+                    ";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult("Updated Successfully the approved attribute");
+        }
+
+
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {

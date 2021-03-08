@@ -111,6 +111,31 @@ namespace WebAPI.Controllers
             return table;
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public JsonResult GetUserById(int id)
+        {
+            string query = @"
+                    select id, username, usertype, email from dbo.Usuario" + @"
+                    where id = " + id ;
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("RRTCEAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table);
+        }
+
         [HttpPost]
         public JsonResult Post(Usuario usuario)
         {
@@ -174,12 +199,6 @@ namespace WebAPI.Controllers
 
             return new JsonResult("Updated Successfully");
         }
-
-        [HttpGet]
-        [Route("employee")]
-        [Authorize(Roles = "ADMIN")]
-        public string Employee() => "Funcionário";
-
 
         [HttpDelete]
         [Route("{id}")]
