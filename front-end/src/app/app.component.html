@@ -3,7 +3,27 @@
         <span><a id="homeLink" class="active headerLink" routerLink="">
             <img class="logoImage" src="assets/rr-tce_logo.png"></a></span>
         <span class="example-spacer"></span>
-        <span><a class="headerLink" id='yellowButton' routerLink="/login">Login</a></span>
+        <div *ngIf="estaLogado() && isAdmin()">
+            <span>
+                <a class="headerLink" id='yellowButton' routerLink="/users">Usuários</a>
+            </span>
+        </div>
+        <div *ngIf="estaLogado() && !isAdmin()">
+            <span>
+                <a class="headerLink" id='yellowButton' 
+                    [routerLink]='["/user", currentUserID()]'>Perfil
+                </a>
+            </span>
+        </div>
+        <div *ngIf="estaLogado()">
+            <span><a class="headerLink" id='yellowButton' 
+                (click)="logout()" routerLink="/">Logout</a>
+            </span>
+        </div>
+        <div *ngIf="!estaLogado()">
+            
+            <span><a class="headerLink" id='yellowButton' routerLink="/login">Login</a></span>
+        </div>
         <span>
             <form>
                 <input type="text" class="txt" name="item" 
@@ -12,7 +32,10 @@
         </span>
         <span>
             <form>
-                <input type="submit" class="btn" value="Buscar" (click)="searchTCCs()">
+                <span>
+                    <a class="headerLink" id='yellowButton' [routerLink]="['/tccs', searchText]">Buscar
+                    </a>
+                </span>
             </form>
         </span>
     </mat-toolbar>

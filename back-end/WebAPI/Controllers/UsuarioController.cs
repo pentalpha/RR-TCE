@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         {
             // Recupera o usuário
             /*var userJson = UserRepository.Get(model.Username, model.Password);*/
-            var userTable = GetUserByUsername(model.username, model.passwd);
+            var userTable = GetUserByUsername(model.email, model.passwd);
 
             var users = CommonMethod.ConvertToList<Usuario>(userTable);
 
@@ -91,11 +91,11 @@ namespace WebAPI.Controllers
         }
 
         /*[HttpGet("username/{name}")]*/
-        private DataTable GetUserByUsername(string name, string password)
+        private DataTable GetUserByUsername(string email, string password)
         {
             string query = @"
                     select id, username, usertype, email from dbo.Usuario" + @"
-                    where username = '" + name + @"' 
+                    where email = '" + email + @"' 
                     and passwd = '" + password + @"'
                     ";
             DataTable table = new DataTable();

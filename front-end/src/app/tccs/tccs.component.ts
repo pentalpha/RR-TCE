@@ -17,11 +17,11 @@ export class TccsComponent implements OnInit {
     private tccService: TccDataService,
     private userService: UsersService) {
       this.query = '';
-      if (this.route.snapshot.queryParams['query']) {
-        this.route.params.subscribe(res => this.query = res.query);
+      this.route.params.subscribe(res => this.query = res.id);
+      if(!this.query){
+        this.query = '';
       }
-
-      this.resultTCCs = this.tccService.searchTCCs(this.query);
+      this.resultTCCs = this.tccService.searchTCCs(this.query.toLowerCase());
       this.resultTCCs.sort((a, b) => b.date.getTime()-a.date.getTime());
   }
 

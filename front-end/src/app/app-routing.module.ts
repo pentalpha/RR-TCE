@@ -27,7 +27,7 @@ const routes: Routes = [{
     component: TccEditComponent},
   {path: 'tccs',
     component: TccsComponent},
-  {path: 'tccs/:query',
+  {path: 'tccs/:id',
     component: TccsComponent},
   {path: 'users',
     component: UserListComponent},

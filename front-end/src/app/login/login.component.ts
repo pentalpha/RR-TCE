@@ -20,9 +20,15 @@ export class LoginComponent implements OnInit {
   }
   
   login(){
+    console.log(this.loginForm.controls.id.value);
+    console.log(this.loginForm.controls.chave.value);
+
     this.authService.login(this.loginForm.controls.id.value, this.loginForm.controls.chave.value)
       .subscribe(
-        () => {
+        (answer) => {
+          console.log(answer);
+          localStorage.setItem('userid', answer['user']['id'])
+          localStorage.setItem('user_type', answer['user']['usertype'])
           this.router.navigateByUrl('/');
         }
       );

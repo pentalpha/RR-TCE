@@ -83,9 +83,28 @@ export class TccDataService {
     return this.tccs;
   }
 
-  /*#TODO: implement actual search algorithm in backend*/
   searchTCCs(query: string): TCC[]{
-    return this.tccs;
+    let results: TCC[] = new Array();
+    for (let tcc of this.obtainTCCs()){
+      if (tcc.title.toLowerCase().includes(query)){
+        results.push(tcc);
+        console.log("Added 1 - " + tcc.id + " " + query + " in " + tcc.title);
+      }else{
+        if (tcc.abstract.toLowerCase().includes(query)){
+          results.push(tcc);
+          console.log("Added 2 - " + tcc.id);
+        }else{
+          for (let kw of tcc.keywords){
+            if (kw.toLowerCase().includes(query)){
+              results.push(tcc);
+              console.log("Added 3 - " + tcc.id + " kw ");
+              break;
+            }
+          }
+        }
+      }
+    }
+    return results;
   }
 
   obtainTCC(id: Number): TCC{

@@ -4,6 +4,10 @@
 3. Execute "npm install";
 4. Execute "ng serve";
 
+Alguns usuários disponíveis para login:
+PROFESSOR	monica@gmail.com	1234
+STUDENT	torres@gmail.com	1234
+ADMIN	admin@gmail.com	1234
 
 ------------------ Back-end de arquivos-----------------------------------
 1. Abrir prompt;
@@ -26,3 +30,11 @@ Para visualizar exemplos dos serviços disponíveis:
 1. Abrir Postman;
 2. Import;
 3. Selecione o arquivo em "...\RR-TCE\RR-TCE.postman_collection.json".
+
+----------------------- Banco de Dados -----------------------------------
+1. Ter uma servidor do Microsoft SQL Server rodando localmente;
+2. Abrir o Microsoft SQL Server Management Studio;
+3. Conectar ao servidor SQL;
+4. Criar o banco de dados e inserir os dados de exemplo na tabela com os 
+scripts "SQL Criação do BD" e "SQL Dados de Exemplo", localizados na pasta 
+"back-end".
