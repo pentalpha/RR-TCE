@@ -12,14 +12,14 @@ export class AuthServiceService {
 
   }
 
-  login(id: string, chaveacesso: string){
-    return this.http.post<any[]>('https://localhost:5001/api/login', {id, chaveacesso})
+  login(username: string, passwd: string){
+    return this.http.post<any[]>('http://localhost:5000/api/usuario/login', {username, passwd})
       .pipe(
-        tap(response => this.setSession(response))
+        tap(response => this.setSession(response, username))
       );
   }
 
-  private setSession(authResult){
+  private setSession(authResult, username){
     localStorage.setItem('token', authResult.accessToken);
     localStorage.setItem('expires_at', authResult.expiration);
   }

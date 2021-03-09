@@ -16,5 +16,21 @@ export class AppComponent {
   searchTCCs(){
 
   }
+
+  obterStyle() : string {
+    if (localStorage.getItem("username") != null) {
+      return "";
+    } else {
+      return "display: none;";
+    }
+  }
+
+  estaLogado() : boolean {
+    if (localStorage.getItem("username") != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   
 }
